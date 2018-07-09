@@ -6,10 +6,20 @@ server:
 eureka:
   instance:
     hostname: localhost
+    #心跳包发送间隔
+    lease-renewal-interval-in-seconds: 30
+    #定义服务失效时间，当超过这个时间，鸡认为某个服务已经失效
+    lease-expiration-duration-in-seconds: 90
   client:
+    #当前服务注册中心仅仅作为单实例存在，所以禁用注册行为
     register-with-eureka: false
     fetch-registry: false
     service-url:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka
+  server:
+    #是否开启注册中心的自我保护机制
+    #所谓的自我保护机制，指的是在15min内，心跳低于85%，注册中心会将所有的服务保护起来，让这些实例不会过期
+    #但是这样也会带来一个问题就是客户端可能会调用到一个“失效”的服务，因此客户端必须有容错机制或者断路器
+    enable-self-preservation: false
 
 
