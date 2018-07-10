@@ -1,12 +1,12 @@
-package com.liuyun.Hello;
+package com.liuyun.ribbon;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class HelloApplication {
+public class RibbonApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(HelloApplication.class, args);
+        SpringApplication.run(RibbonApplication.class, args);
     }
 }
