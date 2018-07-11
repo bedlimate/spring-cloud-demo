@@ -16,8 +16,6 @@ public class DefaultFilter extends ZuulFilter {
 
     private static final Logger logger = LoggerFactory.getLogger(DefaultFilter.class);
 
-    private final Object EMPTY = new Object();
-
     /**
      * 该方法返回一个字符串，代表过滤器的类型。
      * 在zuul中，定义了四种不同生命周期的过滤器类型，具体如下：
