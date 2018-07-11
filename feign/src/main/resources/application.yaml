@@ -10,4 +10,14 @@ eureka:
       defaultZone: http://localhost:8000/eureka/
 feign:
   hystrix:
+  #开启hystrix对feign的支持
     enabled: true
+  #为了减少通信过程对性能的损坏，可以开启gzip压缩
+  compression:
+    request:
+      enable: true
+    response:
+      enable: true
+
+
+
