@@ -65,11 +65,7 @@ public class DefaultFilter extends ZuulFilter {
             //则必须设置为false, 否则后续会抛出异常 getWriter() has already been called for this response
             ctx.setSendZuulResponse(false);
             ctx.setResponseStatusCode(401);
-            try {
-                ctx.getResponse().getWriter().println("Invalid request Id");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            ctx.setResponseBody("Invalid request");
             logger.warn("[{}: {}] is invalid!", request.getMethod(), request.getRequestURL());
         }
         return null;
