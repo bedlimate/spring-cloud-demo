@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liuyun.Hello.mapper.UserMapper">
+
+    <insert id="saveUser" parameterType="com.liuyun.common.entity.User">
+        insert into service_user(id, name, birthday, now)
+        values (
+          #{id},
+          #{name},
+          #{birthday},
+          <!-- 此处必须加上'jdbctype = VARCHAR‘或者指定typeHandler（3.4.4及以上版本的mybatis，
+          否则自定义的typeHandler在插入数据的时候不会起作用） -->
+          #{now, jdbcType = VARCHAR}
+        );
+    </insert>
+</mapper>

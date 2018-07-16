@@ -1,6 +1,11 @@
 spring:
   application:
     name: service-1
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: liuyun123
+    url: jdbc:mysql://localhost:3306/spring_cloud_demo
 server:
   port: 8011
 
@@ -9,3 +14,9 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8000/eureka
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: mapper/*.xml
+
+
+
