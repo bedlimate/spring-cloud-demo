@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: spring-cloud-config
+  cloud:
+    config:
+      server:
+        git:
+#        git仓库地址
+          uri: https://github.com/bedlimate/spring-cloud-config.git
+          #用户名和密码需要替换为自己的
+          username: username
+          password: password
+
+server:
+  port: 9000
