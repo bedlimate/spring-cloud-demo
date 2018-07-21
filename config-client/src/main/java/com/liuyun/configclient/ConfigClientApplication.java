@@ -14,6 +14,19 @@ public class ConfigClientApplication {
         那么设定的 spring.cloud.config.uri将不会起作用
         否则，看到的日志将是这样的：
             “Fetching config from server at : http://localhost:8888”(使用默认的设置)
+
+
+       要在客户点启用配置刷新功能需要注意点：
+            1. 在当前版本下， 首先需要做如下配置
+            management:
+                  endpoints:
+                    web:
+                      exposure:
+                        include: "*" （如果不做这样配置， 会得到404）
+            2. 配置刷新的时候请求的URL应该的格式：
+                    POST http://{host}/actuator/refresh
+            3. 请求头配置
+                Content-Type： application/json (如果携带请求头不是这样， 会得到415)
      */
 
     public static void main(String[] args) {
