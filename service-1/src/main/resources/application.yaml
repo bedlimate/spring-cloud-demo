@@ -1,11 +1,13 @@
 spring:
   application:
     name: service-1
+# spring-boot 2.0 默认使用Hikaripoool
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    username: root
-    password: liuyun123
-    url: jdbc:mysql://localhost:3306/spring_cloud_demo
+      driver-class-name: com.mysql.jdbc.Driver
+      username: root
+      password: liuyun123
+      url: jdbc:mysql://localhost:3306/spring_cloud_demo
+
 server:
   port: 8011
 

@@ -15,4 +15,15 @@
           #{now, jdbcType = VARCHAR}
         );
     </insert>
+
+    <select id="getUsers" parameterType="java.util.List"
+            resultType="com.liuyun.common.entity.User">
+        select id, name, birthday, now from service_user
+        where id in
+          <foreach collection="userIds" item="userId" open="(" close=")" separator=",">
+              #{userId}
+          </foreach>
+
+
+    </select>
 </mapper>

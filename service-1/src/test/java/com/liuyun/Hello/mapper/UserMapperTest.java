@@ -11,6 +11,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -22,11 +24,19 @@ public class UserMapperTest {
     @Test
     public void saveUserTest() {
         User user = new User();
-        user.setId(100);
+        user.setId(400);
         user.setName("spring-boot-test");
         user.setBirthday(LocalDate.now());
         user.setNow(OffsetDateTime.now());
         int rows = userMapper.saveUser(user);
         Assert.assertEquals(1, rows);
+    }
+
+    @Test
+    public void getUsersTest() {
+        List<Integer> userIds = new ArrayList<>(4);
+        userIds.add(100);
+        List<User> users = userMapper.getUsers(userIds);
+        Assert.assertEquals(1, users.size());
     }
 }
