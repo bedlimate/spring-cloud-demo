@@ -18,9 +18,15 @@ public class UserController {
         userService.saveUser(user);
     }
 
+    @GetMapping("/user/{userId}")
+    public User getUser(@PathVariable Integer userId){
+        return userService.getUserById(userId);
+    }
+
     // GET http://localhost:8011/users?userId=100,200,300
     @GetMapping("/users")
     public List<User> getUsers(@RequestParam List<Integer> userIds){
+
         return userService.getUsers(userIds);
     }
 }

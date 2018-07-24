@@ -16,6 +16,13 @@
         );
     </insert>
 
+    <select id="getUserById" parameterType="java.lang.Integer"
+            resultType="com.liuyun.common.entity.User">
+        select id, name, birthday, now from service_user
+        where id = #{id}
+    </select>
+
+
     <select id="getUsers" parameterType="java.util.List"
             resultType="com.liuyun.common.entity.User">
         select id, name, birthday, now from service_user

@@ -11,5 +11,6 @@ public interface UserMapper {
 
     int saveUser(User user);
 
+    User getUserById(Integer userId);
     List<User> getUsers(@Param("userIds") List<Integer> ids);
 }

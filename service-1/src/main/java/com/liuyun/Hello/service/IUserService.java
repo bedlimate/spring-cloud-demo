@@ -9,5 +9,6 @@ public interface IUserService {
 
     void saveUser(User user);
 
+    User getUserById(Integer userId);
     List<User> getUsers(List<Integer> userIds);
 }
