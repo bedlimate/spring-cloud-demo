@@ -1,6 +1,7 @@
 package com.liuyun.springcloudhystrix.controller;
 
 import com.liuyun.common.entity.User;
+import com.liuyun.springcloudhystrix.hystrix.UserCollapseCommand;
 import com.liuyun.springcloudhystrix.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 @RestController
 public class UserController {
@@ -24,7 +26,9 @@ public class UserController {
 
     @GetMapping("/user/{userId}")
     public User getUserById(@PathVariable Integer userId) throws ExecutionException, InterruptedException {
-        return userService.getUserById(userId);
+        UserCollapseCommand collapseCommand = new UserCollapseCommand(userService, userId);
+        Future<User> future = collapseCommand.queue();
+        return future.get();
     }
 
 }
