@@ -20,9 +20,16 @@ public class UserCollapseCommand extends HystrixCollapser<List<User>, User, Inte
                 withCollapserKey(HystrixCollapserKey.Factory.asKey("userCollapsedCommand"))
                 .andCollapserPropertiesDefaults(
                         HystrixCollapserProperties.Setter()
-                        .withTimerDelayInMilliseconds(100)
-                )
-        );
+                .withTimerDelayInMilliseconds(100))
+                //设置合并请求的作用域，
+                // 默认情况是Scope.RUQUEST，这个代表对单线程内的一次或者多次调用进行合并，
+                // 此处还需注意，histrix 认为在任何时刻同一线程对同一服务调用的时候，如果传递的参数内容一样，
+                // hystrix认为，这几次的调用结果是一样的，因此，会对相同的参数去重，然后在做批量操作。
+                // 例如：在某一线程A内，连接想service-1服务，发起5次查询user操作，如果五次的id分别是：
+                // 100、100、200、300、400，则合并之后向service-1发起请求的时候携带的参数是100、200、300、400.
+                // 但是对于我们额web环境而言，实际是一个多线程环境，因此大部分情况下需要将多个线程的请求进行合并。因此，
+                // 将作用域设置为 GLOBAL。多线程情况下的调用，默认不会去重。
+                .andScope(Scope.GLOBAL));
         this.userService = userService;
         this.userId = userId;
     }
