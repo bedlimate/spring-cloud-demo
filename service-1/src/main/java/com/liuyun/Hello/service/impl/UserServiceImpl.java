@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
-@Service
+@Service("baseUserService")
 public class UserServiceImpl implements IUserService {
 
     @Autowired
@@ -40,7 +40,6 @@ public class UserServiceImpl implements IUserService {
                 .stream().filter(userId -> userId != null)
                 .collect(Collectors.toList());
         List<User> users = userMapper.getUsers(userIds);
-        users.stream().noneMatch()
         log.info("user count: [{}]", users.size());
         return users;
     }
